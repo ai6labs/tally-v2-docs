@@ -1,0 +1,79 @@
+---
+title: "Privacy"
+description: "What Tally reads, what it stores, what leaves your Mac, and how to erase it."
+---
+
+Tally runs on your Mac. It reads the logs your AI tools write, but only to get token counts and cost data. It never keeps your prompts, your AI responses or the text of your conversations, and it never stores file contents.
+
+## Switches
+
+Open **Settings**, then **Privacy**. Each reader is a switch. Turn a switch off and that reader stops. Your choices are saved on this Mac.
+
+| Switch | Default | What it does |
+|---|---|---|
+| Look for AI tools on this computer | On | Finds the tools that have usage here. |
+| Read usage logs | On | Reads token counts from the logs your tools write. |
+| Find subscriptions and renewals from your Gmail receipts | Off | Reads Gmail receipts, read-only. Merchant, amount, currency, date, billing period, and attached invoice PDFs are kept. Never the email's text. |
+| Sync documents and saved invoices to your account | On | Keeps a copy of approved invoice PDFs in private storage in your Tally account while you are signed in. Turn it off to stop new copies; existing copies stay until you choose to delete them. See [Invoices](/invoices). |
+| Discover apps from Gmail sender domains and sign-up subjects | Off | Looks at sender domains and sign-up subjects. It never reads message bodies. |
+| Read browser sign-in cookies and authentication storage | Off | Lets Tally read usage from a browser sign-in. |
+| Keep personal memory from exports and session files I choose | Off | Lets Memory use the exports and session files you choose. |
+| Let my AI apps read my subscriptions and spend through `tally mcp` | Off | Lets an AI app read your subscriptions and spend. Read-only. |
+| Let my AI apps read my usage totals through `tally mcp` | Off | Lets an AI app read usage totals. Read-only, separate from subscriptions and spend. Not a savings number. |
+| Send anonymous statistics and error reports | Off | See [What leaves your Mac](#what-leaves-your-mac). |
+
+The Privacy section also has an **Access log** tab: every read, skip, switch change, export and delete, with names only, never contents.
+
+## Teams
+
+If you are in a team, the Privacy section has a **Team sharing** part with one switch per team: **Share my usage totals**. It is off by default. When it is on, only your token and cost totals count toward the team total. Never prompts, messages or anything per message. Team totals stay hidden until enough people share (five by default), so nobody's numbers can be picked out. The same switch is on the **Team** page.
+
+Team owners can share their subscriptions with the team. Only the name, plan, seats, price and renewal date of each subscription leave their Mac. Subscriptions marked personal, payment methods and invoices are not shared with the team. Your own approved invoice PDFs still copy to your Tally cloud unless you turn **Sync documents and saved invoices to your account** off. That copy is for your account, not for the team.
+
+## What stays on your Mac
+
+Tally stores its data in a folder named `.tally` in your home folder. It includes:
+
+- usage counts by tool, model and hour,
+- project and session totals, with project names and folder paths,
+- your subscriptions, budgets and settings (while you are signed in, the subscription list also syncs to your Tally account; see [What leaves your Mac](#what-leaves-your-mac)),
+- before subscription sync changes the list on this Mac, a copy of it (the last three are kept, never uploaded),
+- what the Gmail scan found: merchant, amount, currency, date, billing period, and the email's ID for **Open in Gmail**, never the email's text,
+- PDF invoices attached to those receipts, under `.tally/tracker/invoices/`,
+- if you connect an LLM gateway: its address, your harness names, and one line per request for the last 90 days (time, harness, model, provider, token counts, cost, duration, status and error kind), never a prompt, a reply or the error text,
+- limit readings, and
+- the access log.
+
+Project names, paths and session details are never uploaded. Billing keys and the gateway key are kept in the macOS Keychain. Keys for plan and limit providers are kept in the Keychain too; if the Keychain cannot be used, Tally keeps such a key in a private file on this Mac and says so on the tile. What you set on **Settings**, then **Connections** (a gateway address, a team ID, account names and the unofficial endpoint switch) is kept on this Mac without any key in it.
+
+## What leaves your Mac
+
+**Always:**
+
+- **Sign-in:** Tally needs you to sign in. Signing in talks to the Tally sign-in service. Your usage data is not uploaded unless you turn on **Sync usage** (see below).
+
+**On by default:**
+
+- **Subscription sync:** while you are signed in, Tally keeps your subscription list in step with your Tally account, so the same list shows on [app.tallyless.com](https://app.tallyless.com) and your other devices. For each subscription it sends only these fields: name, vendor, plan, seats, seats in use, the charge per billing cycle, currency, whether the price is known, auto-renew, billing cycle, custom cycle unit and length, start, next renewal and end dates, paused status, resume date, category, the personal flag, and how the row was added. It never sends usage, invoices, payment methods, cost centers, notes or anything from your email. To stop it on this Mac, open **Settings**, then **Account**, and turn **Sync subscriptions** off; the account copy stays. **Stop syncing on all devices** stops it for every device and keeps the account copy. **Delete cloud subscriptions** deletes the account copy; your Mac's list stays.
+- **Public price lists:** Tally downloads public model price lists, at most once every 24 hours, to estimate costs.
+- **Limit checks:** Tally asks each provider's own service for your usage limits, with the sign-in or key you set up for that provider.
+- **Update check:** Tally asks GitHub Releases whether there is a new version. See [Updates](/updates).
+- **Approved invoice PDFs:** for services you added, and receipts Tally saved without review because every check passed, Tally copies the saved PDF to your Tally account while you are signed in. Turn **Sync documents and saved invoices to your account** off in Privacy to stop this. See [Invoices](/invoices).
+
+**Only when you choose:**
+
+- **Sync usage:** off until you turn it on in **Settings**, then **Advanced**, then **Cloud**. It sends half-hour token counts per tool and model, and the cost a tool reports itself, so all your devices show together. Never prompts, code, project names or provider keys.
+- **Gmail:** when you scan, Tally reads your receipts from Google, read-only. The text of your mail stays on this Mac, except the Read with AI snippet below.
+- **Read with AI** (off by default): only if you turn on **Allow screenshot import**, tick **Read with AI** and are signed in, Tally sends a short snippet of each candidate email (the sender, the subject, up to 300 characters of text and the attachment names) to the Tally AI service, which passes it to a model to decide whether it is an invoice. A file you press **Read** on is sent the same way. Tally does not store the snippet, the file or the answer.
+- **Billing keys:** Tally asks Anthropic, OpenAI or OpenRouter for your API spend with the key you added.
+- **Plan and limit keys:** when you click **Connect** in **Settings**, then **Connections**, Tally sends one read to that provider with the key you pasted, and saves the key only if the read works. No model request is made. Opening the screen sends nothing. A provider that needs **Use the unofficial endpoint** gets nothing from Tally until you turn that switch on.
+- **LLM gateway:** if you connect one, Tally reads its usage from the gateway address you entered, about every 15 minutes while Tally is running. It sends the gateway key and nothing else. See [Connect an LLM gateway](/gateways).
+- **Team:** if you create or join a team, the team list, members, roles and invites are kept by Tally's online service. Your usage totals are shared only while your **Share my usage totals** switch is on. An owner's subscriptions are shared only after they choose **Share my subscriptions**. When you invite someone by email, Tally's online service sends that address one email with your display name together with your sign-in email address, the team name, and the single-use invite link. See [Teams](#teams).
+- **Anonymous statistics** (off by default). If you turn on **Send anonymous statistics and error reports**, Tally sends a heartbeat at most once a day (app version and operating system), page views and a few feature events, and error reports. It never includes your name, your files, token counts or prompts.
+
+To block statistics for good, open `~/.tally/tracker/config.json` in a text editor, set `"telemetry": false`, then restart Tally.
+
+## Erase your data
+
+- **Erase captured data:** open **Settings**, then **Local data**, then **Erase captured data**. This removes usage, subscriptions and caches captured on this Mac. Your sign-in and settings are kept. A connected LLM gateway is disconnected and its key removed from this Mac. Invoice copies already in your Tally cloud stay there until you turn **Sync documents and saved invoices to your account** off and choose to delete them. If **Sync subscriptions** is on, your Tally account still holds your subscriptions and they come back on the next sync. Turn sync off first, or use **Delete cloud subscriptions** in **Settings**, then **Account**.
+- **Erase everything:** quit Tally, then delete the `.tally` folder in your home folder.

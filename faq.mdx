@@ -1,0 +1,84 @@
+---
+title: "FAQ"
+description: "Common questions about Tally."
+---
+
+## Why do I have to sign in?
+
+Tally shows nothing until you sign in or create an account, and no credit card is needed. A saved sign-in keeps working when you are offline, and your usage data stays on your Mac unless you turn on **Sync usage**. See [Sign in and first-run setup](/first-run).
+
+## Does Tally read my prompts or my conversations?
+
+Tally reads the logs your AI tools write, but only to count tokens and estimate cost. It never keeps prompts, responses or conversation text. See [Privacy](/privacy).
+
+## Does Tally read my email?
+
+Only if you agree: the first-run choice (**Continue**) or **Scan Gmail**. Access is read-only, and Tally keeps the merchant, amount, currency, date and billing period, plus the email's ID so **Open in Gmail** can show you the receipt. If the receipt has a PDF, that file is saved too. It never stores the email's text.
+
+## Why is the month total different from my estimated usage?
+
+The month total is what you are billed or what your plans cost. Estimated usage is what your tokens would cost at public API prices. It is shown on its own line and is never added to the total.
+
+## Why does a cost say "est."?
+
+Tally works out usage cost from token counts and public API prices. It is not your bill. To count real API spend, add a billing key in **Settings**, then **Connections**, in the **Billing** group.
+
+## Why is a tool missing?
+
+Tally only shows tools that have usage on this Mac. Use the tool once; Tally reads new usage by itself. If a tool keeps its data in an unusual folder, Tally may not find it.
+
+## Why does a limit say "Not reported"?
+
+Tally has not had a reading from that provider yet. Use **Add a provider** or **Connect** on the Limits screen. Some tools need you to sign in on their website first.
+
+## Where is my data stored?
+
+In the `.tally` folder in your home folder. Approved invoice PDFs are also copied to your Tally cloud by default when you are signed in. See [Invoices](/invoices) and [Privacy](/privacy).
+
+## How do I erase my data?
+
+Open **Settings**, then **Local data**, then **Erase captured data**. To remove everything, quit Tally and delete the `.tally` folder. See [Privacy](/privacy).
+
+## How do I start again from first-run setup?
+
+Use **Run setup again** in **Settings › Local data** to keep your data, or run the install script with `--reset` to start fresh with a backup of your data. See [Install Tally](/install#start-again-from-first-run-setup).
+
+## Why does Tally not offer the new version?
+
+The Tally repository is private for now, so the update check cannot see new releases. Install new versions with the [install script or by hand](/install). See [Updates](/updates).
+
+## Is there a Windows or Linux version?
+
+Not now. The Windows and Linux apps are paused.
+
+## Does Tally have team features?
+
+Yes. Tally starts as an app for one person and grows to a team. Signed in, choose **Create a team** on Home or in **Settings**, then **Account**. You become the team's owner and can invite people by email as an owner, admin or member. Tally makes a single-use invite link; it does not send the email, so you send the link yourself.
+
+Once you are in a team, **Team** appears in the sidebar. It shows the members, the team's subscriptions that an owner chose to share, and the team total. Each member decides what they share with the team: their usage totals or nothing, and nothing is the default. Prompts and messages are never shared.
+
+Team needs Tally's online service. If it is not reachable, the **Create a team** offer does not appear.
+
+## Does Tally have leaderboards or cloud sync?
+
+There is no leaderboard, and your usage counts stay on your Mac unless you turn on **Sync usage**.
+
+Approved invoice PDFs (subscriptions you added, and receipts Tally saved without review because every check passed) are copied to your Tally account by default when you are signed in. Turn **Sync documents and saved invoices to your account** off in [Privacy](/privacy) if you want them only on this Mac. See [Invoices](/invoices).
+
+Your subscription list is copied to the Tally cloud only if you turn cloud sync on from Subscriptions. [AI agents](/ai-agents) read that cloud copy, not the files on this Mac.
+
+## Where are my invoices stored?
+
+On this Mac, under `.tally/tracker/invoices/`, after a Gmail scan finds a PDF. A copy of each approved invoice also goes to your Tally cloud by default. Open **Subscriptions**, then **Invoices**, to view, download or correct them. See [Invoices](/invoices).
+
+## How do I let Claude read my Tally data?
+
+Open **Settings**, then **AI agents**, and create a connection. The token is shown once, lasts 30 days, and is one connection per agent. See [Connect an AI agent](/ai-agents).
+
+## Does Tally work without an internet connection?
+
+Yes, for reading your local usage, and a saved sign-in works offline. Limit checks, Gmail scans, billing keys, invoice cloud copies, AI-agent connections and the price list refresh need an internet connection.
+
+## macOS says Tally can't be opened. What now?
+
+Right-click Tally in Applications, choose **Open**, then **Open** again. If macOS still refuses, run `xattr -dr com.apple.quarantine /Applications/Tally.app` once. See [Install Tally](/install).

@@ -1,0 +1,121 @@
+---
+title: "Connect an LLM gateway"
+description: "How Tally reads usage from a Manifest LLM Gateway you run or rent, what it stores, and how to disconnect."
+---
+
+An LLM gateway is a proxy that sits between your tools and the AI providers and records every request it forwards. Tally can read that record from a [Manifest LLM Gateway](https://github.com/mnfst/llm-gateway), either one you host yourself or one you rent.
+
+Tally only reads. It never changes anything on the gateway, and it never sees your prompts or replies.
+
+<Note>
+This feature has been tested against a self-hosted Manifest gateway, version 6.29.2. It has not been tested against Manifest Cloud yet.
+</Note>
+
+## What you get
+
+- The requests that pass through the gateway are added to your usage and cost charts, next to the tools Tally already reads on this Mac.
+- A **Gateway** view with requests, cost, tokens, latency and errors.
+- A switch per harness, so usage is not counted twice. A harness is the gateway's name for one tool or app that sends requests through it.
+
+## Connect
+
+1. Open **Settings**, then **Connections**, and go to the **Gateways** group.
+2. Check **Gateway address**. If a gateway runs on this Mac, Tally fills it in and shows **Found on this Mac**. Otherwise type the address of your gateway.
+3. Read the notice under the field, then click **Connect**. Your browser opens the gateway's approval page. If no page opens, use **Open the approval page**.
+4. Approve in the browser. The tab then says "Tally is connected" and you can close it.
+5. Back in Tally, the card shows a **Ready** status. Tally starts the first sync, which reads the last 90 days.
+
+You have five minutes to approve. Click **Cancel** to stop a sign-in that is waiting.
+
+### What you are approving
+
+- The gateway's approval page says **Manifest CLI**, not Tally. Tally uses the same sign-in that the gateway's own command-line tool uses.
+- The key that the gateway gives has **full access to your gateway account**. The gateway does not offer a read-only key for this sign-in.
+- Tally uses the key only to read usage. It can call a fixed, short list of read addresses on the gateway and nothing else.
+- The key is saved in the macOS Keychain, never in a file. If the Keychain is not available, Tally does not connect.
+- You can revoke the key at any time with **Disconnect**.
+
+## Use a harness key instead
+
+If you do not want to give Tally the sign-in key, click **Use a harness key instead**, paste the key into **Harness key**, and click **Connect with key**. A harness key starts with `mnfst_`. A key that starts with `mnfst_pat_` is not a harness key and is refused.
+
+The limits:
+
+- Tally gets totals only, for the last 24 hours, 7 days and 30 days, and only for the one harness the key belongs to.
+- Nothing is added to your usage and cost charts.
+- There are no charts, no harness switches and no request list. The card shows **Totals only**.
+- A harness key can also send requests through your gateway, so treat it like a password. Tally only reads with it.
+- Tally cannot revoke a harness key. **Disconnect** removes it from this Mac. Delete it on the gateway yourself.
+
+To move to full analytics later, click **Sign in for full analytics**.
+
+## Count in totals
+
+After the first sync, the card lists your harnesses under **Harnesses**. Each one has a **Count in totals** switch.
+
+- **On:** the harness's requests are added to your usage and cost charts.
+- **Off:** they are left out of the charts. They still show in the Gateway view.
+
+Some harnesses start off. If the gateway says a harness is Claude Code, Codex, OpenCode, OpenClaw or Hermes, Tally already reads that tool's own logs on this Mac. Counting the gateway's copy as well would count the same usage twice. If that tool does not run on this Mac, turn the switch on.
+
+Every other harness starts on. **Reset** puts a switch back to its default. A change shows in the charts straight away.
+
+## The Gateway view
+
+Click **View gateway analytics** on the card. Pick a **Period** (24 hours, 7 days, 30 days or 90 days) and a **Harness**, or **All harnesses**.
+
+| Block | What it shows |
+|---|---|
+| Summary | **Requests**, **Success rate**, **Cost**, **Tokens**, **Median latency** and **95th percentile latency**, each with the change from the previous period. |
+| **Requests over time** | Requests per hour or per day: **Succeeded**, **Recovered by fallback** and **Failed**. |
+| **Cost and tokens** | Cost and tokens **By provider**, **By harness** or **By model**. |
+| **Reliability** | **Errors** by kind and HTTP status, **Attempts per request**, and **Fallbacks** from one model to another. |
+| **Models** | Requests, tokens, cost and median latency per model, and the share **On subscription**. |
+| **Recent requests** | The latest 50 requests: time, harness, model, tokens, cost, latency and status. |
+
+About cost:
+
+- The cost is the gateway's own estimate for each request. It is not a bill.
+- **Included** means the request ran on a subscription or a local model, so it has no price per request.
+- **No price** means the gateway had no price for that model.
+
+With a harness key, the view shows **Gateway totals** only.
+
+## Sync and key expiry
+
+Tally reads the gateway about every 15 minutes while it is running. **Sync now** reads it straight away. Tally keeps the last 90 days of requests.
+
+The sign-in key expires 30 days after it was last used, and each sync counts as use. The gateway also sets a hard limit of 90 days from the sign-in. After that the card shows **Needs sign-in**. Click **Sign in again** and approve in the browser. Your stored requests are kept when you sign in to the same gateway and account.
+
+## Troubleshooting
+
+**The address is refused.** The address must start with `https://`. Plain `http://` is accepted only for a gateway on this Mac or on a private network, for example `http://localhost:2099`.
+
+**What the status means:**
+
+| Status | Meaning | What to do |
+|---|---|---|
+| **Ready** | The last sync worked. | Nothing. |
+| **Needs sign-in** | The gateway rejected the key. It expired or was revoked. | Click **Sign in again**. |
+| **Error** | The last sync failed. The card shows why under "Last sync problem". | Tally retries by itself, first after 5 minutes and then less often, up to every 6 hours. Or click **Sync now**. |
+| **Clock offset** | The gateway's request times are in the future compared with this Mac's clock. Nothing was saved. | Check the date and time on this Mac. Then check the gateway server: it must run in UTC. A server set to another time zone gives this status, or puts requests in the wrong hour. |
+| **Stale** | No sync has worked for 48 hours. | Check that the gateway is running and reachable, then click **Sync now**. |
+
+**The sign-in was not approved in time.** Click **Connect** again. The approval must be done in a browser on this Mac, because the gateway sends the answer back to Tally on this Mac.
+
+**"Your system's secure key store is unavailable."** Tally could not save the key in the Keychain, so it did not connect. Unlock the Keychain and try again.
+
+## Disconnect
+
+Open **Settings**, then **Connections**, go to the **Gateways** group, click **Disconnect**, then **Disconnect and remove**. Tally then:
+
+- revokes the sign-in key on the gateway,
+- removes the key from the Keychain,
+- deletes the stored requests, and
+- takes the gateway's usage out of your charts.
+
+If the gateway cannot be reached, the key is still removed from this Mac. Revoke it on the gateway yourself in that case.
+
+**Erase captured data** in **Settings**, then **Local data** also disconnects the gateway, removes its key from this Mac and deletes the stored requests.
+
+See [Privacy](/privacy) for what Tally stores.
