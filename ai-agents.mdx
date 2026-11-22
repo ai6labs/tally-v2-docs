@@ -1,0 +1,41 @@
+---
+title: "Connect an AI agent"
+description: "Let Claude read your Tally cloud subscriptions and invoices. Each connection has its own token, shown once, for 30 days."
+---
+
+You can let Claude answer questions about your subscriptions and invoices. It uses the copy in your Tally cloud, not the files on this Mac.
+
+A screenshot walkthrough is in Tally: **Settings**, then **AI agents**, then **Step-by-step setup guide**. The same guide is at [app.tallyless.com/guides/connect-ai-agents.html](https://app.tallyless.com/guides/connect-ai-agents.html).
+
+## Before you start
+
+- Sign in to Tally. Connections belong to your Tally account.
+- Turn on subscription cloud sync from **Subscriptions** if you want the agent to see your plans. Local-only records are not included.
+- Approved invoice PDFs are already copied to your Tally cloud by default. See [Invoices](/invoices).
+
+## Create a connection
+
+1. Open **Settings**, then **AI agents**.
+2. Name the connection for the agent and computer, for example `Claude Desktop – laptop`. Create one connection per agent so you can revoke each one separately.
+3. Leave **Allow changes and document uploads** off for read-only access. Turn it on only if the agent should create or edit subscriptions, upload invoices, or delete attached documents. It is told to ask you before each change.
+4. Click **Create connection**.
+
+The token starts with `tly_` and is shown only once. Copy it, or copy the full configuration, before you hide setup or leave the page. Treat it like a password. It expires after 30 days.
+
+## Connect Claude
+
+Tally fills in the configuration for you. Choose the tab that matches your app:
+
+| App | What you do |
+|---|---|
+| **Claude Desktop** | Download the connector package (it contains no token), unzip it somewhere you will keep, then paste the configuration into Claude Desktop **Settings → Developer → Edit Config**. Replace the example path with the real path to `server.cjs`. Quit Claude Desktop fully and open it again. |
+| **Claude Code** | Paste the HTTP configuration, or run `claude mcp add` with the URL and `Authorization: Bearer tly_…` header Tally shows. If the project's `.mcp.json` is in Git, put `"Authorization": "Bearer ${TALLY_AGENT_TOKEN}"` in the file and set `TALLY_AGENT_TOKEN` in your shell. Do not commit the token. |
+| **Claude on the web** | Add a custom connector with the URL Tally shows, then add the Authorization header it copies for you. |
+
+`TALLY_AGENT_TOKEN` is per connection, not a shared account secret. Each agent on each computer should have its own connection. When it expires, create a new connection and replace the token.
+
+## Test and revoke
+
+In a new chat, ask: `List my Tally subscriptions.` Claude asks to use the Tally tool, then lists them.
+
+**Active connections** on the same Settings page shows each connection, its permissions and its expiry. **Revoke** cuts access on the agent's next request.

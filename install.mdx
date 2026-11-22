@@ -1,0 +1,65 @@
+---
+title: "Install Tally"
+description: "Install Tally on your Mac, with the install script or by hand."
+---
+
+Tally runs on macOS. The Windows and Linux apps are paused, so there is no Windows or Linux download.
+
+Each release has two files: `Tally-<version>.dmg` (the app, for example `Tally-2.3.2.dmg`) and `SHA256SUMS` (checksums to check the download). Get them from the [latest release](https://github.com/ronkaldes/tally-releases/releases/latest). The page is public, so you do not need a GitHub account. The file name carries the version, so open the release and pick the `.dmg` listed there.
+
+## Install with the script (recommended)
+
+The install script does every step for you:
+
+1. Downloads `Tally-<version>.dmg` and `SHA256SUMS` with plain `curl`. It needs no GitHub CLI and no sign-in.
+2. Stops unless the DMG matches its checksum.
+3. Quits Tally if it is running and copies the new app into Applications.
+4. Trusts the app: it removes the macOS quarantine flag, so macOS does not block the first launch.
+5. Opens Tally.
+
+```bash
+gh api repos/ronkaldes/tally/contents/scripts/install-mac.sh -H "Accept: application/vnd.github.raw" > install-mac.sh
+bash install-mac.sh
+```
+
+The script itself lives in the source repository, which is private, so fetching it needs access to that repository. Without that access, install by hand below.
+
+To check a download without installing anything, run `bash install-mac.sh --dry-run`.
+
+To install a DMG you already downloaded, put `SHA256SUMS` next to it and run `bash install-mac.sh --dmg ~/Downloads/Tally-2.3.2.dmg`.
+
+## Install by hand
+
+1. Download `Tally-<version>.dmg` and `SHA256SUMS` into the same folder.
+2. Check the download before you open it:
+
+   ```bash
+   cd ~/Downloads
+   shasum -a 256 -c SHA256SUMS --ignore-missing
+   ```
+
+   The line for `Tally-<version>.dmg` must end in `OK`. If it does not, delete the file and download it again.
+3. Open `Tally-<version>.dmg` and drag Tally to Applications.
+4. Trust the app once. Tally is not notarised by Apple, so macOS blocks the first launch. Right-click (or Control-click) Tally in Applications, choose **Open**, then **Open** again. If macOS still refuses, run this once:
+
+   ```bash
+   xattr -dr com.apple.quarantine /Applications/Tally.app
+   ```
+
+Tally adds an icon to the menu bar. The menu bar shows the same month total as Home.
+
+## Start again from first-run setup
+
+To start from a clean state, run the script with `--reset`:
+
+```bash
+bash install-mac.sh --reset
+```
+
+`--reset` deletes nothing. It moves your Tally data (the `.tally` folder in your home folder) to a dated backup folder, `~/tally-backup-<date-time>`. The next launch asks you to sign in and then runs first-run setup. The script prints the command that puts your old data back.
+
+To run setup again and keep your data, open **Settings**, then **Local data**, then **Run setup again**.
+
+## Next step
+
+[Sign in and finish first-run setup](/first-run).

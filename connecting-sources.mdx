@@ -1,0 +1,77 @@
+---
+title: "Connecting sources"
+description: "How Tally finds your AI tools, and how to add billing keys, Gmail receipts and plan limits."
+---
+
+Tally counts your AI spend from a few kinds of sources. Only the first one is on without you doing anything.
+
+## AI tools on this Mac
+
+Tally reads the usage logs that your AI tools already write. It supports 47 tools and assistants, and finds them by itself. First-run setup shows the tools it found.
+
+Some tools need a small hook, which Tally installs for them. If a tool keeps its data in an unusual folder, Tally may not find it. See the [FAQ](/faq).
+
+To see every tool Tally found, open **Settings**, then **Connections**, and look under **Found on this Mac**. A tool whose hook is not in place shows **Hook missing**. Click **Repair** and Tally puts that one tool's hook back. For a few tools Tally cannot add the hook for you; the tile then asks you to run the tool's own setup again.
+
+You can turn tool detection and log reading off in [Privacy](/privacy).
+
+## Billing keys (API spend)
+
+To count what you pay for API use, add an admin key for **Anthropic**, **OpenAI** or **OpenRouter**. Open **Settings**, then **Connections**, and go to the **Billing** group. Home also shows an **Add key** item under **Needs you** while no key is set.
+
+Keys are stored in the macOS Keychain and are read only by Tally on your Mac.
+
+### OpenRouter
+
+With an OpenRouter management key, Tally reads what OpenRouter charged you each day, by model, and adds it to the month total. It syncs every six hours and keeps the last 30 days.
+
+- Bring-your-own-key (BYOK) usage is not counted. The provider that owns the key bills you for it, so counting it here would count it twice.
+- If you also enter your OpenRouter credit top-ups as a subscription, you count the same money twice. Use one or the other.
+
+## LLM gateway
+
+If your tools or apps send their requests through a Manifest LLM Gateway, Tally can read the gateway's usage and add it to your charts. Open **Settings**, then **Connections**, and go to the **Gateways** group. Access is read-only, and it is off until you connect. See [Connect an LLM gateway](/gateways).
+
+## Gmail receipts
+
+Tally can find your subscriptions in Gmail receipts. Start a scan from first-run setup, from the scan card on Home, or from the **Add** menu on Subscriptions.
+
+- Access is read-only.
+- Tally keeps the merchant, amount, currency, date and billing period, plus the email's ID for **Open in Gmail**. It never stores the email's text.
+- If the receipt has a PDF, Tally saves that file on this Mac. After you add the subscription, a copy also goes to your Tally cloud by default. See [Invoices](/invoices).
+- Nothing is added until you click **Add**.
+- After the first scan, Gmail rescans by itself every 6 hours.
+
+To rescan or disconnect Gmail, open **Settings**, then **Email**.
+
+## Statements
+
+To add charges from a bank or card statement, choose **Add**, then **Import statement (CSV)** on Subscriptions. Charges Tally cannot match wait under **Needs review**.
+
+## Plan limits
+
+The [Limits](/limits-and-budgets) screen reads your plan limits from each provider's own service. Use **Add a provider** on that screen to set up the ones that are not connected yet. Some tools, such as Cursor, ask you to **Connect** and sign in on their website first. Your sign-in stays on this Mac.
+
+### Connect a plan or limit provider
+
+For a provider that takes an API key:
+
+1. Open **Settings**, then **Connections**.
+2. Find the service under **Plans and limits**, or type its name in **Find a connection**.
+3. Paste the key into the service's key field. Where Tally knows the page, a link such as **Get a Groq key** opens the provider's own key page. Tally tells you when a key looks too short or does not start the usual way. You can still try it.
+4. Click **Connect**. Tally does one test read with the key. If it works, the tile shows **Connected** and the first figure it read, such as the share of your limit used or your balance. If the read fails, nothing is saved.
+5. The key is stored in the macOS Keychain and the tile says **Stored in the Keychain**. It is never shown again. If the Keychain cannot be used, Tally keeps the key in a private file on this Mac instead, and the tile says so.
+
+Good to know:
+
+- **Several accounts.** A provider with its own usage service can have more than one account. Click **Add another account**, give it a name, and paste its key. Each account is tested the same way before its key is saved.
+- **Use the unofficial endpoint.** A few providers can only be read through an address they do not document. It may break or change without notice. Tally sends such a provider nothing until you turn this switch on for it. It is off by default.
+- **No usage API.** Some services have no way to read usage with a key. They are listed with **No usage API** and have no key field.
+- **No key to add.** Tools such as Claude Code and Cursor are read from the tool's own sign-in on this Mac. Their tiles show a status only.
+- **Extra fields.** Some services need one more setting beside the key, such as a **Team ID**, or a **Base URL** for a gateway you host yourself. Tally tests the key with that setting before it saves either.
+- **Test** runs the read again with the saved key. **Disconnect** removes the saved key from this Mac.
+- **Set by an environment variable.** If a key comes from an environment variable, Tally uses it and saves nothing. Remove the variable to change the key here.
+
+## Browser sign-ins
+
+Tally can read usage from a browser sign-in, but only when you turn on **Read browser sign-in cookies and authentication storage** in [Privacy](/privacy). It is off by default.

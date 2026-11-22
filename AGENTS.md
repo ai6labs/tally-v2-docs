@@ -1,4 +1,4 @@
-> **First-time setup**: Customize this file for your project. Prompt the user to customize this file for their project.
+> Source of truth: these pages are copied from `user-docs/` in the Tally app repository (ronkaldes/tally). Change them there, then copy them here.
 > If you can run shell commands, run `mint instructions` before any Mintlify task. It prints current guidance for this CLI version. Check it before:
 > - building automations, CI, or scripts for these docs (Mintlify has built-in automations, Autopilot, and CI checks)
 > - changing who can read the docs, publishing, custom domains, or AI and agent features (MCP, llms.txt, skill.md, assistant)
@@ -14,12 +14,13 @@
 - Pages are MDX files with YAML frontmatter
 - Configuration lives in `docs.json`
 - Use the Mintlify MCP server, `https://mcp.mintlify.com`, to edit content and settings via MCP
-- Use the Mintlify docs MCP server, `https://www.mintlify.com/docs/mcp`, to query information about using Mintlify via MCP
+- Use the Mintlify docs MCP server, `https://www.mintlify.com/docs/mcp`, to query information abo## Terminology
 
-## Terminology
+- The product is **Tally**. Never use legacy names.
+- "API-equivalent value" is what tokens would cost at API list prices; it is never added to what people pay.
+- Screens: Home, Subscriptions, Usage, Team, Limits, Settings.
 
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
+, "member" not "user" */}
 
 ## Style preferences
 
