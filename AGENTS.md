@@ -8,6 +8,13 @@
 
 # Documentation project instructions
 
+## Processing limits
+
+- Avoid unnecessary work and stop when further attempts are not making progress.
+- Set an explicit timeout on network requests and potentially blocking commands. Default to two minutes or less; use a longer limit only when the task requires it.
+- If a command times out or is interrupted, investigate or report the blocker instead of retrying indefinitely.
+- Do not leave background processes running unnecessarily. On request to stop, stop processes started for the task and verify their status before confirming. Do not stop unrelated processes.
+
 ## About this project
 
 - This is a documentation site built on [Mintlify](https://mintlify.com)
