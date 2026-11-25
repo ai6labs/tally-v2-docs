@@ -1,0 +1,54 @@
+---
+title: "Why is my invoice missing or incorrect?"
+sidebarTitle: "Invoice problems"
+description: "Resolve missing invoice PDFs, incomplete Gmail scans, inaccessible links, guessed amounts or seats, duplicate records, and unexpected billed totals."
+keywords: [missing invoice, failed scan, duplicate, wrong amount, no PDF, expired link, seats]
+---
+
+If Tally's invoice details look wrong or a PDF is missing, compare the source email and the provider's billing history first. Then correct the record or import the original. Finding a billing email does not guarantee its invoice was downloaded.
+
+## Gmail is connected, but nothing appears
+
+Check that subscription scanning is enabled and that the run has finished. Recent history is checked before older receipts; an incomplete scan is not a complete empty result. Keep Tally running and online, and use the displayed retry or reconnect action if needed.
+
+The separate **Import invoices from Gmail** tool has its own date window and 50-email limit. Increase the window if the receipt is older, or download and [import the original](/importing-invoices). Neither scan covers unlimited history.
+
+## The row says “No PDF attached”
+
+Use **Open in Gmail**. The email may contain only a link, or the background collector may not have saved a supported attachment. Tally currently saves PDFs attached to receipts found by the subscription scan; it does not automatically navigate every vendor portal.
+
+Open the provider's billing page, download its invoice and receipt, and import the documents through **Read invoices**. If the email is the only receipt, retain it in Gmail; a text-only record is not a saved original PDF.
+
+## The invoice link needs sign-in or has expired
+
+Sign in on the provider's own website and obtain a fresh original. Upload that file instead of sharing passwords, cookies or a private sign-in link. Pasting a login page into the public-link importer will not connect that account.
+
+## The amount, currency, date or seats are wrong
+
+For a saved Gmail row, use **Subscriptions → Invoices → Review** to correct date, amount, currency and status. For an import draft, edit the extracted fields before **Add selected**.
+
+Check whether the number is a subtotal, tax, total, credit balance or actual payment. A quantity of 1 may be a parser assumption; it is not proof of one paid seat. Multiple plans, prorations or quantities need checking against the original.
+
+The current saved-invoice review does not provide a complete line-item editor. Keep the original document for details the record cannot represent.
+
+## An invoice and receipt appear twice
+
+Compare the invoice reference, date, amount, currency, purchased service and billing account. Same-email document pairing and duplicate checks help, but matching service names alone does not establish duplication across all sources.
+
+Do not mark a real invoice void just to force a duplicate total down. Check which record represents the charge and correct or remove the mistaken subscription/import record as appropriate. Keep the original evidence for anything unresolved.
+
+## The PDF or ZIP was skipped
+
+The importer accepts files up to 5 MB and ZIPs up to 20 MB with at most 50 supported files. Read the skipped-file result. Use smaller batches for remaining files; download an unencrypted original if the parser cannot read the PDF.
+
+For scans or images, **Read with AI** may help when enabled. It sends the selected content to the configured service, so review [Privacy](/privacy) first. AI results still need checking.
+
+## The total looks higher than payments
+
+The **Invoices** total includes issued invoices as well as paid records. Rows marked **Needs review** can still contribute. The chart also differs from a bank settlement report.
+
+Check [how Tally's costs differ](/understanding-costs), review statuses against originals, and avoid adding API top-ups, usage estimates and the invoice paying for that same usage as separate spend.
+
+## What to include when reporting a problem
+
+Record your Tally version, the action you tried, the visible error, whether the scan was complete, and the file type and approximate size. Redact invoice screenshots. Do not share passwords, API keys, browser cookies, private download links or a full mailbox export.

@@ -32,7 +32,8 @@
           "invoices",
           "ai-agents",
           "gateways",
-          "limits-and-budgets"
+          "limits-and-budgets",
+          "assistant"
         ]
       },
       {
@@ -46,6 +47,17 @@
         "group": "Help",
         "pages": [
           "faq"
+        ]
+      },
+      {
+        "group": "Billing and invoices",
+        "pages": [
+          "subscriptions",
+          "gmail-scan",
+          "importing-invoices",
+          "invoice-troubleshooting",
+          "seats-and-usage",
+          "understanding-costs"
         ]
       }
     ]

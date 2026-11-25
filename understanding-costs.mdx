@@ -1,0 +1,43 @@
+---
+title: "Understand billed and estimated costs"
+sidebarTitle: "Understanding costs"
+description: "Understand billed amounts, plan commitments and token estimates in Tally, compare currencies, and avoid counting subscriptions or API credits twice."
+keywords: [billed, plan, estimated cost, actual spend, tokens, currency, API, credits]
+---
+
+Tally separates billing evidence from token cost estimates. Use the label beside a number before comparing it with a bank statement or provider invoice. The same model activity can be included in a subscription and also have an estimated API value.
+
+## What each number means
+
+| Number | Meaning |
+|---|---|
+| **Billed** | Dated billing or provider-cost records included in the view. These are not necessarily bank-settled payments. |
+| **Plan** | The cost recorded for your subscription plans. Check the billing cycle and whether it is an equivalent monthly amount. |
+| **Billed + Plan** | A combination of supported billed records and plan costs used by Home. Check the contributing sources. |
+| **Estimated usage** / **est.** | Token counts priced using public model rates. It is not a bill and is not added to Home's spend total. |
+
+For example, a $20 monthly seat can produce tokens with an estimated API value above $20. Adding that estimate to the seat fee would misstate what you paid.
+
+## Invoices are different from payment settlement
+
+An invoice establishes an amount billed; a receipt can establish vendor-reported payment. A bank transaction provides separate settlement evidence.
+
+In the current **Invoices** view, both **Paid** and **Issued, not paid yet** can contribute to **Total billed**. **Refunded** and **Void** rows are excluded. A **Needs review** badge does not guarantee exclusion, so check the originals before using totals for financial decisions.
+
+See [Review and export invoices](/invoices).
+
+## Keep fixed fees and metered use distinct
+
+A provider may bill a seat subscription and API usage separately. ChatGPT and an OpenAI API organization, for example, can represent different products and accounts. Confirm what each invoice covers before combining or merging records.
+
+Prepaid credits also need care: buying a balance and later consuming that balance are not two payments. If a provider-cost connector already supplies the spend you want to track, adding its credit top-ups as a recurring plan can double count it.
+
+## Compare currencies and periods
+
+Compare original-currency totals first. An amount labeled **About** is a reference-rate conversion, not an exact bank or accounting conversion. Exchange rates, fees and settlement dates can differ.
+
+Check the date range and whether a number is a billed charge, a recurring commitment or a monthly equivalent. A missing month or absent amount can mean missing evidence, not zero spend.
+
+## Check coverage before deciding
+
+A connected source can be stale, incomplete or unable to supply daily data. Check connection health and scan progress. Catalog prices, installed tools, sign-up emails and a free benefit do not independently establish a paid subscription, a canceled plan or realized savings.

@@ -1,0 +1,26 @@
+---
+title: "Install the Chrome preview"
+description: "Install Tally's Chrome preview manually, then check account authorization and review the data you share."
+---
+
+This is a preview package, not a Chrome Web Store release. Chrome 120 or newer is required. The download alone does not verify that account authorization is available in your deployment.
+
+## Install the preview
+
+1. [Download the Chrome preview ZIP](https://app.tallyless.com/downloads/tally-chrome-extension.zip).
+2. Unzip it into a folder you will keep.
+3. Open `chrome://extensions`, enable **Developer mode**, and choose **Load unpacked**.
+4. Select the unzipped folder containing `manifest.json`.
+5. Open the extension and choose **Connect to Tally**. Sign in on the Tally page and review the requested authorization. Reopen the popup after the sign-in window closes.
+
+If authorization is unavailable, keep using the [Tally app](https://app.tallyless.com). A downloaded package does not establish that its matching backend and hosted authorization page are deployed and working.
+
+## Check your account data
+
+The extension shows subscriptions explicitly shared with your account. Private Mac-only records remain private. Loading a browser JSON export stages records locally; only individually reviewed saves reach Tally.
+
+Use **Manage connections** in the hosted app if you need to revoke a connection and the extension cannot reach the service. Do not paste account tokens or API keys into a chat.
+
+## AI-agent connections
+
+The current [Tally AI-agent guide](https://app.tallyless.com/guides/connect-ai-agents.html) documents Claude Desktop, Claude Code and Claude on the web. It does not verify a ChatGPT setup flow. Do not assume Chrome extension installation creates a ChatGPT connection.
