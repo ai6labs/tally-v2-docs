@@ -7,7 +7,7 @@ description: "What Tally asks when you open it for the first time."
 
 Tally opens on a sign-in screen. You need to sign in or create an account before Tally shows anything, and no credit card is needed. **Sign in** and **Create account** sit side by side. Choose Google or GitHub, or use your email.
 
-- Your token usage stays on your Mac unless you turn on **Sync usage**. Signing in syncs your subscription list and copies saved invoice PDFs to your account; turn off the subscription sync in Settings > Account and the invoice copy in Settings > Privacy.
+- Your token usage stays on your Mac unless you turn on **Sync usage**. Signing in syncs your subscription list and copies approved saved invoice PDFs to your account; turn off the subscription sync in Settings > Account and the invoice copy in Settings > Privacy.
 - A saved sign-in keeps working when you are offline.
 - If you sign out, Tally returns to the sign-in screen. Signing out stops syncing; copies already in your account stay until you delete them.
 
@@ -35,7 +35,7 @@ Amounts are monthly list prices in US dollars; you can edit them later.
 
 ### What Gmail finds
 
-The Gmail scan is read-only and checks the last 90 days of receipts first. Receipt fields stay on your Mac; attached invoice PDFs are saved here too, and while you are signed in copies go to your Tally account unless you turn that off in [Privacy](/privacy). On Home, the scan card shows what it found, for example **Found 6 subscriptions · Add 5 · Review 1**. Nothing is added without your click. After that, Tally checks for new mail every 10 minutes while the app runs.
+The Gmail scan is read-only and checks the last 90 days of receipts first. Receipt fields stay on your Mac; attached invoice PDFs are saved here too, and while you are signed in copies of approved PDFs go to your Tally account unless you turn that off in [Privacy](/privacy). On Home, the scan card shows what it found, for example **Found 6 subscriptions · Add 5 · Review 1**. Nothing is added without your click. Background rescans run while the local service is running. See [Find subscriptions in Gmail](/gmail-scan) for scan timing and coverage.
 
 ## 4. Setup step 3 of 3: Just you, or your team?
 
@@ -51,8 +51,10 @@ Home shows **New here? The tour takes a minute.** Choose **Take the tour** for f
 
 <Frame><img src="/images/screens/home-tour.png" alt="The first tour stop: Your month so far" /></Frame>
 
+Scans run while Tally's local service is running. Recent receipts are checked before older history, so results can still be incomplete while the scan continues. See [Find subscriptions in Gmail](/gmail-scan) for progress, saved PDFs and review guidance.
+
 ## Run setup again
 
 Open **Settings**, then **Local data**, then **Run setup again**. Your data is kept.
 
-To start completely fresh, see [Start again from first-run setup](/install#start-again-from-first-run-setup).
+For downloading and installing the Mac app, see [Install Tally](/install).

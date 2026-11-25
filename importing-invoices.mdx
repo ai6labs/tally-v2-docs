@@ -1,0 +1,51 @@
+---
+title: "Import invoice files and links"
+description: "Import PDFs, images, email files or public invoice links into Tally, check extracted billing details, and choose how approved files are retained."
+keywords: [invoice, import, PDF, ZIP, EML, MBOX, link, OCR, receipt]
+---
+
+Use **Subscriptions → Add → Other imports… → Read invoices** to turn invoice files into editable drafts. Tally reads text-based PDFs locally first. Review the result before choosing **Add selected**.
+
+## Choose a source
+
+| Source | Current limits and behavior |
+|---|---|
+| PDF or image | Up to 5 MB per file. Images include PNG, JPEG, WebP and GIF. |
+| ZIP | Up to 20 MB, with at most 50 supported files and a total extracted-size limit. Nested ZIPs and unsafe paths are skipped. |
+| EML or MBOX | Up to 5 MB per file and 50 messages. Check skipped-message and attachment notices. |
+| Public link | A direct public HTTPS document link, including supported shared Drive links. Sign-in pages are not downloadable invoices. |
+| **Import invoices from Gmail** | Reuses your Gmail connection and sends findings into the invoice draft review. |
+
+A large batch can have both successful and skipped files. Read the result summary and import the remaining documents in smaller batches. Selecting a ZIP does not guarantee every member was processed.
+
+## Import a linked invoice
+
+Paste the document's public link into **Or paste a public link to an invoice**, then choose **Read**. Tally checks the download and its file type.
+
+If the email opens an account dashboard, asks you to sign in, or contains an expired link, open the provider website yourself and download the original invoice or receipt. Import that file. Tally's current public-link importer does not sign in to arbitrary billing portals for you.
+
+Keep private invoices private. You do not need to make an invoice publicly accessible to use Tally; downloading and uploading the file is an alternative.
+
+## Import from Gmail
+
+Connect Gmail through **Scan Gmail** first. In **Read invoices**, use **Import invoices from Gmail**, choose the look-back period and start the import.
+
+This importer is separate from subscription discovery. It accepts a window of 1–365 days, defaults to 19 days and checks up to 50 matching emails per scan. It tries supported attachments, invoice-looking public links, then a cleaned body-text preview. A body-only result is not an original PDF.
+
+## Check the draft
+
+Verify the vendor, invoice number, amount, currency, billing cycle, dates, plan and seats against the original. Correct guessed values before adding. In particular, an assumed monthly cycle, an unqualified dollar sign or an assumed seat count needs checking.
+
+Credit notes, refunds, prorations, zero-value documents and receipts referring to an existing invoice are identified separately from new recurring charges. An **Already added** or paired-receipt indication needs comparison with the existing record before creating another charge.
+
+## Images, scanned PDFs and AI
+
+If the file has no readable text, Tally may ask you to enable **Read with AI**. This is optional and depends on the configured invoice reader. A selected file is sent to the Tally AI service and its model provider when you press **Read**. Check every returned field.
+
+For Gmail sorting with AI, a short snippet can include sender, subject, up to 300 characters of text and attachment names. See [Privacy](/privacy) for the separate file-copy and AI choices.
+
+## Keep an original
+
+Approved imported files can be copied to private storage in your signed-in Tally account while **Settings → Privacy → Sync documents and saved invoices to your account** is on. That switch is on by default; an explicit off stays off. This is separate from sending a file to AI and from the background Gmail PDF archive. Check the storage result after approving a draft.
+
+Keep your provider originals until you have confirmed the saved copy opens. See [Review and export invoices](/invoices).
